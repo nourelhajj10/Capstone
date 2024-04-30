@@ -8,10 +8,10 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import joblib
 
 
-filename = "C:\\Users\\Ahmad\\Desktop\\Nour_model1.joblib"
+filename = "Nour_model1.joblib"
 
 #filename1 = "trained_model_2"
-model = joblib.load(filename)
+model = load(filename)
 
 
 
