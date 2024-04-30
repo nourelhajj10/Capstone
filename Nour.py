@@ -6,6 +6,7 @@ from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 import joblib
+from joblib import load
 
 
 filename = "Nour_model1.joblib"
