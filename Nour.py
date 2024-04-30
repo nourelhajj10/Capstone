@@ -39,7 +39,7 @@ def predict(input_data):
 
 # Streamlit app
 def main_view():
-    st.title('Model 1 - Zeenni Steel Sales Forecase')
+    st.title('Model 1 - Zeenni Steel Sales Forecast')
     st.write('Please provide your data to calculate the demand of steel')
 
     # Sidebar for user input
