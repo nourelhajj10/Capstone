@@ -23,20 +23,6 @@ model = joblib.load(filename)
 #    model1 = pickle.load(f1)
 
 
-# Define your preprocessor pipeline
-numerical_transformer = Pipeline(steps=[
-    ('scaler', StandardScaler())
-])
-
-categorical_transformer = Pipeline(steps=[
-    ('onehot', OneHotEncoder(handle_unknown='ignore'))
-])
-
-preprocessor = ColumnTransformer(
-    transformers=[
-        ('numerical', numerical_transformer, make_column_selector(dtype_include=np.number, dtype_exclude='timedelta64')),
-        ('categorical', categorical_transformer, make_column_selector(dtype_include=object))
-    ])
 
 # Function to preprocess input data
 def preprocess_input_data(input_data):
@@ -54,8 +40,8 @@ def predict(input_data):
 
 # Streamlit app
 def main_view():
-    st.title('Model 1')
-    st.write('Please Insert your file to check whether to project will get awarded or not')
+    st.title('Model 1 - Zeenni Steel Sales Forecase')
+    st.write('Please provide your data to calculate the demand of steel')
 
     # Sidebar for user input
     st.sidebar.header('User Input')
@@ -75,26 +61,6 @@ def main_view():
         st.header('Predictions:')
         st.write(predictions)
 
-# Function to display the model information view
-def model_info_view():
-    st.title('Model 2')
-    st.write('Please Insert your file to check the Project Budget Class')
-    # Add code to display model information here
-    # Sidebar for user input
-    st.sidebar.header('User Input')
-    # Add input widgets for user input data
-    uploaded_file = st.sidebar.file_uploader("Upload CSV file", type=["csv"])
-    if uploaded_file is not None:
-        input_data = pd.read_csv(uploaded_file)
-        st.write('Input Data:')
-        st.write(input_data)
-
-        # Make predictions
-        predictions = model1.predict(input_data)
-
-        # Display predictions
-        st.header('Predictions:')
-        st.write(predictions)
 
 
 # Main function to run the app
