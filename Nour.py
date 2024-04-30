@@ -5,14 +5,12 @@ import pickle
 from sklearn.compose import ColumnTransformer, make_column_selector
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
-import joblib
 from joblib import load
 
 
-filename = "Nour_model1.joblib"
 
 #filename1 = "trained_model_2"
-model = load(filename)
+model = load('Nour_model1.joblib')
 
 
 
