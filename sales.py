@@ -77,7 +77,7 @@ def main():
         # Display images on the top left and top right
         st.image(image1, width=200)
         st.image(image2, width=100)
-        st.markdown('<p class="title"> Nour El Haj </p>', unsafe_allow_html=True)
+        st.markdown('<p class="title"> Nour El Hajj </p>', unsafe_allow_html=True)
         st.markdown('<p class="title"> Zee Optimization: Enhanced Production Efficiency and Market Dominance with a Holistic Data-Driven Approach</p>', unsafe_allow_html=True)
         
    
