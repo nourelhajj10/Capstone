@@ -13,7 +13,7 @@ sales = pd.read_csv("sales_encoded.csv")
 zip_file_path = 'best_rf_reg_sales.zip'
 
 # Path to where you are currently working
-working_folder = 'D:/augustmess/Fullbright/internshipMess/Internship/RMNour'
+working_folder = 'Capstone/best_rf_reg_sales.zip'
 
 # Open the zip file
 with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
