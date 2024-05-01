@@ -4,6 +4,7 @@ import pickle
 import os
 import zipfile
 from sklearn.ensemble import RandomForestClassifier
+import tempfile
 
 
 # Load each sheet into a DataFrame
@@ -876,8 +877,61 @@ def main():
             sales.drop(columns=['Quantity'], inplace=True)
             df = pd.concat([features,sales],axis=0)
             df = df.fillna(0)
+
+            def download_file_from_google_drive(url, destination_path):
+                session = requests.Session()
+                response = session.get(url, stream=True)
+                token = get_confirm_token(response)
+            
+                if token:
+                    params = {'confirm': token}
+                    response = session.get(url, params=params, stream=True)
+            
+                save_response_content(response, destination_path)
+            
+            def get_confirm_token(response):
+                for key, value in response.cookies.items():
+                    if key.startswith('download_warning'):
+                        return value
+                return None
+            
+            def save_response_content(response, destination):
+                CHUNK_SIZE = 32768  # The size of each chunk to write to the file
+            
+                with open(destination, "wb") as f:
+                    for chunk in response.iter_content(CHUNK_SIZE):
+                        if chunk:  # filter out keep-alive new chunks
+                            f.write(chunk)
+            
+
+            # Determine the best path for data that needs to be persistent
+            base_path = os.getcwd()  # or use tempfile.gettempdir() for a temp directory
+            destination_path = os.path.join(base_path, 'local_model.pkl')
+            
+            # URL for the model file (make sure to replace 'YOUR_FILE_ID_HERE' with the actual Google Drive file ID)
+            # Example usage:
+            file_id = '177ZmJUw2pMV9d3BtKy4ZfpyWADBkMF61'
+            url = f'https://drive.google.com/uc?export=download&id=177ZmJUw2pMV9d3BtKy4ZfpyWADBkMF61'
+            
+            # Check if the model needs to be downloaded
+            if not os.path.exists(destination_path):
+                st.write("Downloading model...")
+                download_file_from_google_drive(url, destination_path)
+                st.write("Model downloaded successfully!")
+            else:
+                st.write("Model already downloaded.")
+            
+            # Load the model
+            if os.path.exists(destination_path):
+                with open(destination_path, 'rb') as file:
+                   load_clf = pickle.load(file)
+                st.write("Model loaded successfully:", load_clf)
+            else:
+                st.error("Failed to download the model.")
+
+
             # Reads in saved classification model
-            load_clf = pickle.load(open('best_rf_reg_sales.zip', 'rb'))
+            #load_clf = pickle.load(open('best_rf_reg_sales.pkl', 'rb'))
  
             
             prediction = load_clf.predict(df) 
@@ -889,6 +943,7 @@ def main():
             st.write("")
             st.write("**Your Predicted Volume for Sales chosen the above features is:**")
             st.write(predicted_price)
+           
   
 if __name__ == "__main__":
     main()
