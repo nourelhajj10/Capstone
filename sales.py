@@ -897,7 +897,7 @@ def main():
             df = pd.concat([features,sales],axis=0)
             df = df.fillna(0)
             # Reads in saved classification model
-            load_clf = pickle.load(open('best_rf_reg_sales.pkl', 'rb'))
+            load_clf = pickle.load(open(pickle_file_name, 'rb'))
  
             
             prediction = load_clf.predict(df) 
