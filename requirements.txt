@@ -1,20 +1,15 @@
-affine @ file:///Users/ktietz/demo/mc3/conda-bld/affine_1629890479180/work
 altair==5.0.1
 appdirs==1.4.4
-asn1crypto @ file:///tmp/build/80754af9/asn1crypto_1596577642040/work
 attrs==23.1.0
 backports.zoneinfo==0.2.1
 beautifulsoup4==4.12.2
 blinker==1.6.3
 cachetools==5.3.2
 certifi==2021.10.8
-cffi @ file:///C:/ci/cffi_1636542104204/work
-chardet @ file:///C:/ci/chardet_1607706910910/work
 charset-normalizer==3.3.2
 click==8.1.7
 colorama==0.4.6
 cryptography==3.3.2
-cycler @ file:///tmp/build/80754af9/cycler_1637851556182/work
 Cython==0.29.24
 decorator==5.1.1
 dpctl==0.11.1
