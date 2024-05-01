@@ -8,26 +8,6 @@ from sklearn.ensemble import RandomForestClassifier
 
 # Load each sheet into a DataFrame
 sales = pd.read_csv("sales_encoded.csv")
-
-# Path to your zip file
-zip_file_path = 'best_rf_reg_sales.zip'
-
-# Path to where you are currently working
-working_folder = 'Capstone/best_rf_reg_sales.zip'
-
-# Open the zip file
-with zipfile.ZipFile(zip_file_path, 'r') as zip_ref:
-    # Extract the pickle file to the working folder
-    zip_ref.extractall(working_folder)
-
-# Now you can proceed to use the pickle file
-pickle_file_name = 'best_rf_reg_sales.pkl'
-extracted_pickle_file_path = os.path.join(working_folder, pickle_file_name)
-
-# Now you can proceed to use the pickle file
-with open(extracted_pickle_file_path, 'rb') as f:
-    data = pickle.load(f)
-    
     
 # Define custom CSS styles
 custom_css = """
@@ -897,7 +877,7 @@ def main():
             df = pd.concat([features,sales],axis=0)
             df = df.fillna(0)
             # Reads in saved classification model
-            load_clf = pickle.load(open(pickle_file_name, 'rb'))
+            load_clf = pickle.load(open('best_rf_reg_sales.zip', 'rb'))
  
             
             prediction = load_clf.predict(df) 
