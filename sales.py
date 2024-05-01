@@ -4,12 +4,11 @@ import pickle
 import os
 import zipfile
 from sklearn.ensemble import RandomForestClassifier
-import tempfile
-
+import requests
 
 # Load each sheet into a DataFrame
 sales = pd.read_csv("sales_encoded.csv")
-    
+
 # Define custom CSS styles
 custom_css = """
 <style>
@@ -878,6 +877,12 @@ def main():
             df = pd.concat([features,sales],axis=0)
             df = df.fillna(0)
 
+            #'https://drive.google.com/uc?export=download&id=177ZmJUw2pMV9d3BtKy4ZfpyWADBkMF61'
+  
+
+            import tempfile
+
+            
             def download_file_from_google_drive(url, destination_path):
                 session = requests.Session()
                 response = session.get(url, stream=True)
@@ -943,7 +948,6 @@ def main():
             st.write("")
             st.write("**Your Predicted Volume for Sales chosen the above features is:**")
             st.write(predicted_price)
-           
   
 if __name__ == "__main__":
     main()
